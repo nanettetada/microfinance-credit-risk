@@ -3,7 +3,7 @@
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:2E86C1,100:1B4F72&height=220&section=header&text=Zim%20Credit%20Risk%20MLOps&fontSize=52&fontColor=ffffff&fontAlignY=38&animation=fadeIn&desc=Loan%20default%20prediction%20for%20Zimbabwean%20microfinance&descSize=17&descAlignY=64" />
 
 <a href="https://github.com/nanettetada">
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&duration=3500&pause=800&color=2E86C1&center=true&vCenter=true&width=700&lines=Model+%2B+API+%2B+Tests+%2B+Docker+%2B+Dashboard;FastAPI+serves+probability+of+default;Interactive+policy+simulator+for+risk+officers" />
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&duration=3500&pause=800&color=2E86C1&center=true&vCenter=true&width=700&lines=The+Loan+Desk+%E2%80%94+a+credit+decision+tool;Model+%2B+API+%2B+Tests+%2B+Docker+%2B+Dashboard;Built+around+how+lending+works+in+Zimbabwe" />
 </a>
 
 <p>
@@ -29,6 +29,29 @@ Most ML tutorials end with a Jupyter cell that prints an accuracy number and cal
 
 I also gave the dataset a **Zimbabwean microfinance** flavour: loan purposes include **school fees** (the three-term cycle every Zim parent knows), **agricultural inputs** for smallholder farmers, **funeral assistance**, **solar backup** for load-shedding, and **business capital**. Home ownership includes the **LODGER** status that's much more common here than a US-style mortgage. The risk model is calibrated against those realities.
 
+The front end is **The Loan Desk** — a single, clean decision screen where a loan officer fills in an application and immediately sees a verdict, the reasons behind it in plain English, and a recommended offer. No jargon, no wall of tabs.
+
+## The dashboard
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <p align="center"><b>Make a decision</b><br/><sub>Verdict, the reasons behind it, and a recommended offer — live as you type</sub></p>
+      <img src="docs/screenshots/01_decision.png" alt="Make a decision" width="100%"/>
+    </td>
+    <td width="50%" valign="top">
+      <p align="center"><b>The whole book</b><br/><sub>Score distribution, the lift chart, default rates by purpose and Zim-specific cuts</sub></p>
+      <img src="docs/screenshots/02_book.png" alt="The whole book" width="100%"/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="top">
+      <p align="center"><b>Set the rules</b><br/><sub>Drag the decline threshold and watch approval rate, default rate, and margin move together</sub></p>
+      <img src="docs/screenshots/03_rules.png" alt="Set the rules" width="100%"/>
+    </td>
+  </tr>
+</table>
+
 ## :sparkles: At a glance
 
 |  |  |
@@ -39,8 +62,8 @@ I also gave the dataset a **Zimbabwean microfinance** flavour: loan purposes inc
 | **Serving** | FastAPI with Pydantic v2 validation; `/predict`, `/predict/batch`, `/health`, `/model/info` |
 | **Quality** | 12 pytest tests including API smoke tests via TestClient |
 | **Packaging** | Dockerfile + docker-compose |
-| **Analytics** | Streamlit dashboard with risk gauges + policy simulator |
-| **Results** | ROC-AUC **0.89**, KS **0.61**, lift **4.3×** in top decile |
+| **Analytics** | "The Loan Desk" — a decision screen, book-level analytics, and a policy simulator |
+| **Results** | ROC-AUC **0.79**, KS **0.45**, and the riskiest score decile defaults ~**8×** more than the book average |
 
 ## :building_construction: Architecture
 
@@ -125,12 +148,12 @@ The suite covers:
 - A risky application scores higher than a safe one
 - The API returns 200 for valid input, 422 for invalid input
 
-## :tv: Interactive dashboard
+## :tv: The Loan Desk
 
-Three tabs:
-- **Score an applicant** — loan application form with a probability-of-default gauge and approve / review / decline recommendation.
-- **Book overview** — risk-band breakdown, score histogram, default rate by predicted score decile (the classic lift chart).
-- **Policy simulator** — drag a decline threshold and watch approval rate, default rate in the approved book, and recall all move together.
+Three plain-English sections:
+- **Make a decision** — fill in an application and immediately get a verdict (approve / take a closer look / decline), the chance of default in plain words, a risk bar, the factors working for and against the borrower, and a recommended rate + monthly repayment (in USD with ZiG context).
+- **The whole book** — risk-band breakdown, score distribution, the lift chart (does a higher score really mean a worse loan?), default rate by loan purpose, and the Zimbabwe-specific cuts: group vs individual lending and repayment channel.
+- **Set the rules** — drag a decline threshold and watch approval rate, the default rate in the approved book, the share of bad loans caught, and the book's margin all move together.
 
 The dashboard reads the model directly via `src.predict`, so it works even when the FastAPI service isn't running.
 
