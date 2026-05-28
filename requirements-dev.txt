@@ -2,3 +2,6 @@ pytest>=7.4
 pytest-cov>=4.1
 httpx>=0.26
 ruff>=0.3
+# Optional: experiment tracking for local training runs. Not needed to run the
+# app or the API, and kept out of requirements.txt so deploys stay lean.
+mlflow>=2.10

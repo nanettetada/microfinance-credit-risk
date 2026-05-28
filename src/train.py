@@ -22,7 +22,10 @@ from .features import build_preprocessor
 try:
     import mlflow
     MLFLOW_AVAILABLE = True
-except ImportError:  # pragma: no cover
+except Exception:  # pragma: no cover
+    # Catch *any* failure, not just ImportError: mlflow pulls in protobuf /
+    # opentelemetry, which raise a TypeError (not ImportError) on newer Python
+    # versions. Experiment tracking is optional, so degrade gracefully.
     MLFLOW_AVAILABLE = False
 
 
