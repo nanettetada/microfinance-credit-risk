@@ -21,7 +21,7 @@ from src.data import (
     PURPOSE,
     load_or_generate,
 )
-from src.predict import get_metadata, predict_many
+from src.predict import MODEL_PATH, get_metadata, predict_many
 
 # --------------------------------------------------------------------------- #
 # Context
@@ -236,17 +236,14 @@ def style_fig(fig, height=380):
 
 
 # --------------------------------------------------------------------------- #
-try:
-    meta = get_metadata()
-    model_loaded = True
-except FileNotFoundError:
-    meta = {"model_version": "n/a", "metrics": {}}
-    model_loaded = False
+# On a fresh deploy (Streamlit Cloud, HF Spaces) the model artifact is
+# gitignored, so train it once on first boot rather than hard-stopping.
+if not MODEL_PATH.exists():
+    with st.spinner("First run — training the credit model (~20 seconds). This only happens once."):
+        from src.train import train
+        train()
 
-if not model_loaded:
-    st.error("No trained model found. Run `python -m src.train` from the project root, then refresh.")
-    st.stop()
-
+meta = get_metadata()
 auc = meta.get("metrics", {}).get("test_auc", 0)
 version = meta.get("model_version", "n/a")
 
