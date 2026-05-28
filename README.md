@@ -17,7 +17,7 @@
 <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" />
 </p>
 
-<a href="https://huggingface.co/spaces/NanetteTada/microfinance-credit-risk"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Open%20Live%20Demo-FFD21E?style=for-the-badge" /></a>
+<a href="https://microfinance-credit-risk.streamlit.app/"><img src="https://img.shields.io/badge/Open%20The%20Loan%20Desk%20%E2%80%94%20Live%20Demo-16794C?style=for-the-badge&logo=streamlit&logoColor=white" /></a>
 
 </div>
 
