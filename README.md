@@ -17,7 +17,7 @@
 <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" />
 </p>
 
-<a href="https://microfinance-credit-risk.streamlit.app/"><img src="https://img.shields.io/badge/Open%20The%20Loan%20Desk%20%E2%80%94%20Live%20Demo-16794C?style=for-the-badge&logo=streamlit&logoColor=white" /></a>
+<a href="https://microfinance-credit-risk.streamlit.app"><img src="https://img.shields.io/badge/Open%20The%20Loan%20Desk-Live%20Demo-16794C?style=for-the-badge&logo=streamlit&logoColor=white" /></a>
 
 </div>
 
